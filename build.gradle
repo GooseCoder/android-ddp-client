@@ -9,7 +9,7 @@ buildscript {
       mavenCentral()
    }
    dependencies {
-      classpath 'com.android.tools.build:gradle:0.8.+'
+      classpath 'com.android.tools.build:gradle:0.11.+'
    }
 }
 apply plugin: 'android-library'
@@ -17,7 +17,7 @@ apply plugin: 'android-library'
 /// this overrides the default src/main gradle layout to match Eclipse's
 android {
     compileSdkVersion 19
-    buildToolsVersion "19.0.1"
+    buildToolsVersion "19.1.0"
     
     defaultConfig {
         targetSdkVersion 19
@@ -53,7 +53,7 @@ repositories {
 }
 
 dependencies {
-    compile "com.android.support:support-v4:[13.0,)"
+    compile "com.android.support:support-v4:[19.1,)"
     compile "com.keysolutions:java-ddp-client:[0.5.7,)"
 }
 

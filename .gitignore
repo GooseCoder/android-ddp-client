@@ -17,4 +17,7 @@ bin/
 gen/
 libs/
 .gradle
-
+.idea/
+.DS_Store
+android-ddp-client.iml
+local.properties

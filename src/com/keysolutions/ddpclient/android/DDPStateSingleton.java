@@ -16,6 +16,7 @@
 
 package com.keysolutions.ddpclient.android;
 
+import java.lang.Integer;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
@@ -75,12 +76,12 @@ public class DDPStateSingleton extends MeteorAuthCommands
      * connection info for your Meteor server
      * Override to point to your server
      */
-    protected static final String sMeteorServer = "demoparties.meteor.com";
+    protected final String meteorServer = "";
     /**
      * connection info for your Meteor server
      * Override to point to your server's port
      */
-    protected static final Integer sMeteorPort = 80;
+    protected final Integer meteorPort = 80;
     
     /** reference to lower level DDP websocket client */
     protected DDPClient mDDP;
@@ -112,7 +113,7 @@ public class DDPStateSingleton extends MeteorAuthCommands
         // only called by MyApplication
         if (mInstance == null) {
             // Create the instance
-            mInstance = new DDPStateSingleton(context);
+            mInstance = new DDPStateSingleton(context, "demoparties.meteor.com", 80);
         }
     }
 
@@ -128,8 +129,11 @@ public class DDPStateSingleton extends MeteorAuthCommands
      * Constructor for class (hidden because this is a singleton)
      * @param context Android application context
      */
-    protected DDPStateSingleton(Context context) {
+    protected DDPStateSingleton(Context context, String meteorServer, Integer meteorPort) {
         this.mContext = context;
+        this.meteorServer = meteorServer;
+        this.meteorPort = meteorPort;
+
         createDDPCLient();
         // disable IPv6 if we're running on Android emulator because websocket
         // library doesn't work with it
@@ -147,7 +151,7 @@ public class DDPStateSingleton extends MeteorAuthCommands
      */
     public void createDDPCLient() {
         try {
-            mDDP = new DDPClient(sMeteorServer, sMeteorPort);
+            mDDP = new DDPClient(this.meteorServer, this.meteorPort);
         } catch (URISyntaxException e) {
             Log.e(TAG, "Invalid Websocket URL connecting to " + sMeteorServer
                     + ":" + sMeteorPort);
